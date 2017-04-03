@@ -1,7 +1,7 @@
 const Promise = require('bluebird');
 const {Router} = require('express');
 const {readFileSync, writeFileSync} = require('fs');
-const {filter, indexOf, isEmpty, head, map, sortBy} = require('lodash');
+const {filter, indexOf, isEmpty, head, map, reverse, sortBy} = require('lodash');
 const request = require('request-promise');
 
 const who = 'who.tmp';
@@ -14,7 +14,7 @@ const getListOfMembers = () => request({
     json: true
 }).then((res) => {
     const {members} = res;
-    return Promise.resolve(sortBy(filter(map(members, 'real_name'), (m) => m !== 'slackbot')));
+    return Promise.resolve(sortBy(filter(map(members, (member)=>reverse(member.real_name.replace(' ', '~').split('~')).join(', ')), (m) => m !== 'slackbot')));
 });
 
 const whoseDay = (members) => {
