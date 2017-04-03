@@ -1,7 +1,7 @@
 const Promise = require('bluebird');
 const {Router} = require('express');
 const {readFileSync, writeFileSync} = require('fs');
-const {filter, indexOf, isEmpty, head, map, sortBy} = require('lodash');
+const {filter, indexOf, isEmpty, head, map, reverse, sortBy} = require('lodash');
 const request = require('request-promise');
 
 const who = 'who.tmp';
