@@ -14,7 +14,7 @@ const getListOfMembers = () => request({
     json: true
 }).then((res) => {
     const {members} = res;
-    return Promise.resolve(sortBy(filter(map(members, 'real_name'), (m) => m !== 'slackbot')));
+    return Promise.resolve(sortBy(filter(map(members, (member)=>reverse(member.real_name.replace(' ', '~').split('~')).join(', ')), (m) => m !== 'slackbot')));
 });
 
 const whoseDay = (members) => {
